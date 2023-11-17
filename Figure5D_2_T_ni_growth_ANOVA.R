@@ -19,7 +19,7 @@ tn.w <- tn.w[tn.w$leaf <= 5, ]
 
 # aggregate (take means)
 # reorder genotype levels
-tn.w$genotype <- factor(tn.w$genotype, levels=c("WT", "2b16", "x2e1"))
+tn.w$genotype <- factor(tn.w$genotype, levels=c("WT", "cyp87a126-1", "cyp87a126-2"))
 tn.w$leaf <- factor(tn.w$leaf)
 tn.w$flat <- factor(tn.w$flat)
 tn.w$plantID <- factor(tn.w$plantID)

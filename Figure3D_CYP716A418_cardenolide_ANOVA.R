@@ -9,7 +9,7 @@ cg <- read.csv("3D_CYP716A418_cardenolides.csv")
 
 ##### Rearrange and aggregate data to prepare for statistical analysis ######
 # reorder genotype levels
-cg$genotype <- factor(cg$genotype, levels=c("WT", "2g6810.5.2", "2g6810.5.7"))
+cg$genotype <- factor(cg$genotype, levels=c("WT", "cyp716a418-1", "cyp716a418-2"))
 # normalize such that WT average = 1 for each genin
 cg$digitoxigenin.norm <- cg$digitoxigenin / mean(cg[cg$genotype=="WT", "digitoxigenin"])
 cg$cannogenol.norm <- cg$cannogenol / mean(cg[cg$genotype=="WT", "cannogenol"])
@@ -23,7 +23,7 @@ names(cg.bygenotype) <- c("genotype", "digitoxigenin.mean", "digitoxigenin.sd", 
 
 ##### ANOVA #####
 # ANOVA and post-hoc test on normalized ion count, separate for each genin
-cg$genotype <- factor(cg$genotype, levels=c("WT", "2g6810.5.2", "2g6810.5.7"))
+cg$genotype <- factor(cg$genotype, levels=c("WT", "cyp716a418-1", "cyp716a418-2"))
 # DIGITOXIGENIN
 dig.aov <- aov(digitoxigenin ~ genotype, data=cg)
 summary(dig.aov) # p < 0.001

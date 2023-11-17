@@ -11,10 +11,10 @@ pr <- read.csv("5F1_Pr_oviposition.csv")
 pr <- pr[pr$notes != "no eggs", ]
 
 ##### Chi-squared test for aggregate number of eggs laid on WT vs mutant, separate for each genotype #####
-x2e1 <- chisq.test(colSums(pr[pr$genotype=="x2e1", c("n_WT", "n_mut")]), correct=FALSE)
-x2e1 # cyp87a126-2: p<0.001
-x2b16 <- chisq.test(colSums(pr[pr$genotype=="x2b16", c("n_WT", "n_mut")]), correct=FALSE)
-x2b16 # cyp87a126-1: p<0.001
+cyp87a126.2 <- chisq.test(colSums(pr[pr$genotype=="cyp87a126-2", c("n_WT", "n_mut")]), correct=FALSE)
+cyp87a126.2 # cyp87a126-2: p<0.001
+cyp87a126.1 <- chisq.test(colSums(pr[pr$genotype=="cyp87a126-1", c("n_WT", "n_mut")]), correct=FALSE)
+cyp87a126.1 # cyp87a126-1: p<0.001
 
 ################################################################################
 ################################################################################
@@ -30,7 +30,7 @@ undamaged <- c(14,1,0) # number of undamaged leaves for WT, cyp87a126-1, cyp87a1
 table(pr_damage[pr_damage$leaf_damaged=="Y", "genotype"], useNA="ifany")
 damaged <- c(0,16,13) # number of damaged leaves for WT, cyp87a126-1, cyp87a126-2
 pr_dam2 <- data.frame("damaged"=damaged, "undamaged"=undamaged)
-row.names(pr_dam2) <- c("WT","x2b16","x2e1")
+row.names(pr_dam2) <- c("WT","cyp87a126-1","cyp87a126-2")
 
 ### Chi squared test for caterpillar commencing feeding and causing damage to leaf, by genotype
 chisq.test(pr_dam2, correct=FALSE) # p<0.001

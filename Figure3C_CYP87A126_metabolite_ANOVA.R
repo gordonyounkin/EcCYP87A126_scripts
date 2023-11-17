@@ -11,7 +11,7 @@ cg <- read.csv("3C_1_CYP87A126_cardenolides.csv")
 
 ##### Rearrange and aggregate data to prepare for statistical analysis ######
 # reorder genotype levels
-cg$genotype <- factor(cg$genotype, levels=c("WT", "4g2680.2b16", "4g2680.2e1"))
+cg$genotype <- factor(cg$genotype, levels=c("WT","cyp87a126-1","cyp87a126-2"))
 # Normalize to average abundance in WT
 cg$total_norm <- cg$total / mean(cg[cg$genotype=="WT", "total"], na.rm=TRUE)
 # aggregate by genotype
@@ -20,7 +20,7 @@ cg.bygenotype <- data.frame(genotype=cg.bygenotype[,1], cg.bygenotype$total_norm
 
 ### one-way ANOVA ###
 # ANOVA and post-hoc test on log10(ion count)
-cg$genotype <- factor(cg$genotype, levels=c("WT", "4g2680.2b16", "4g2680.2e1"))
+cg$genotype <- factor(cg$genotype, levels=c("WT","cyp87a126-1","cyp87a126-2"))
 cg.aov <- aov(total ~ genotype, data=cg)
 # get ANOVA summary with p-value
 summary(cg.aov) # anova p-value <<< 0.001
@@ -40,7 +40,7 @@ gsl <- read.csv("3C_2_CYP87A126_glucosinolates.csv")
 
 ##### Rearrange and aggregate data to prepare for statistical analysis ######
 # reorder genotype levels
-gsl$genotype <- factor(gsl$genotype, levels=c("WT", "4g2680.2b16", "4g2680.2e1"))
+gsl$genotype <- factor(gsl$genotype, levels=c("WT","cyp87a126-1","cyp87a126-2"))
 # normalize such that WT average = 1, for aliphatic and indole glucosinolates separately
 gsl$aliphatic.norm <- gsl$aliphatic / mean(gsl[gsl$genotype=="WT", "aliphatic"])
 gsl$indole.norm <- gsl$indole / mean(gsl[gsl$genotype=="WT", "indole"])
@@ -51,7 +51,7 @@ names(gsl.bygenotype) <- c("genotype", "aliphatic.mean", "aliphatic.sd", "indole
 
 ### ANOVA ###
 # ANOVA and post-hoc test on log10(ion count)
-gsl$genotype <- factor(gsl$genotype, levels=c("WT", "4g2680.2b16", "4g2680.2e1"))
+gsl$genotype <- factor(gsl$genotype, levels=c("WT","cyp87a126-1","cyp87a126-2"))
 # ALIPHATIC
 ali.aov <- aov(aliphatic ~ genotype, data=gsl)
 summary(ali.aov) # p = 0.149
